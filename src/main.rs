@@ -16,3 +16,9 @@ struct Node {
     next: Link,
 }
 
+impl List{
+    pub fn new() -> Self {
+        Self { head: Link::Empty }
+    }
+}
+
