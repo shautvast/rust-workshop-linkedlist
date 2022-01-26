@@ -31,4 +31,15 @@ impl List {
     }
 }
 
+#[cfg(test)]
+mod tests {
 
+    use super::*;
+
+    #[test]
+    fn test() {
+        let mut list = List::new();
+        list.push(42);
+        println!("{:?}", list);
+    }
+}
