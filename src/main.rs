@@ -29,6 +29,20 @@ impl List {
         };
         self.head = Link::More(Box::new(new_node));
     }
+
+    pub fn pop(&mut self) -> Option<i32> {
+        let result;
+        match &self.head {
+            Link::Empty => {
+                result = None;
+            }
+            Link::More(node) => {
+                result = Some(node.elem);
+                self.head = node.next;
+            }
+        };
+        result
+    }
 }
 
 #[cfg(test)]
