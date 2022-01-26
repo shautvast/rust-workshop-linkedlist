@@ -24,7 +24,7 @@ impl List{
     pub fn push(&mut self, elem: i32) {
         let new_node = Node {
             elem: elem,
-            next: self.head
+            next: std::mem::replace(&mut self.head, Link::Empty)
         };
     }
 
