@@ -50,7 +50,11 @@ mod tests {
     #[test]
     fn test() {
         let mut list = List::new();
+        assert_eq!(None, list.pop());
         list.push(42);
         assert_eq!(Some(42), list.pop());
+        assert_eq!(None, list.pop());
     }
+
+
 }
