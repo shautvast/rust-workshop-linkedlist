@@ -29,13 +29,13 @@ impl <T> List<T> {
     pub fn push(&mut self, elem: T) {
         let new_node = Node {
             elem: elem,
-            next: std::mem::replace(&mut self.head, None),
+            next: self.head.take(),
         };
         self.head = Some(Box::new(new_node));
     }
 
     pub fn pop(&mut self) -> Option<T> {
-        match std::mem::replace(&mut self.head, None) {
+        match self.head.take() {
             None => None,
             Some(node) => {
                 self.head = node.next;
