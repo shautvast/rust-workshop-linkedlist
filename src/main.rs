@@ -1,4 +1,12 @@
-fn main() {}
+fn main() {
+    let mut list = List::new();
+    list.push(1);
+    println!("push(1) : {:?}", list);
+    list.push(2);
+    println!("push(2) : {:?}", list);
+    println!("pop() -> {} : {:?}",list.pop().unwrap(),list);
+    println!("pop() -> {} : {:?}",list.pop().unwrap(),list);
+}
 
 #[derive(Debug)]
 pub struct List {
