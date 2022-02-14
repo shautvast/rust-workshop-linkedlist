@@ -13,11 +13,7 @@ pub struct List<T> {
     head: Link<T>,
 }
 
-#[derive(Debug)]
-enum Link<T> {
-    Empty,
-    More(Box<Node<T>>),
-}
+type Link<T> = Option<Box<Node<T>>>;
 
 #[derive(Debug)]
 struct Node<T> {
@@ -27,21 +23,21 @@ struct Node<T> {
 
 impl <T> List<T> {
     pub fn new() -> Self {
-        Self { head: Link::Empty }
+        Self { head: None }
     }
 
     pub fn push(&mut self, elem: T) {
         let new_node = Node {
             elem: elem,
-            next: std::mem::replace(&mut self.head, Link::Empty),
+            next: std::mem::replace(&mut self.head, None),
         };
-        self.head = Link::More(Box::new(new_node));
+        self.head = Some(Box::new(new_node));
     }
 
     pub fn pop(&mut self) -> Option<T> {
-        match std::mem::replace(&mut self.head, Link::Empty) {
-            Link::Empty => None,
-            Link::More(node) => {
+        match std::mem::replace(&mut self.head, None) {
+            None => None,
+            Some(node) => {
                 self.head = node.next;
                 Some(node.elem)
             }
