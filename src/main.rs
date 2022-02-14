@@ -4,8 +4,8 @@ fn main() {
     println!("push(1) : {:?}", list);
     list.push(2);
     println!("push(2) : {:?}", list);
-    println!("pop() -> {} : {:?}",list.pop().unwrap(),list);
-    println!("pop() -> {} : {:?}",list.pop().unwrap(),list);
+    println!("pop() -> {} : {:?}", list.pop().unwrap(), list);
+    println!("pop() -> {} : {:?}", list.pop().unwrap(), list);
 }
 
 #[derive(Debug)]
@@ -21,7 +21,7 @@ struct Node<T> {
     next: Link<T>,
 }
 
-impl <T> List<T> {
+impl<T> List<T> {
     pub fn new() -> Self {
         Self { head: None }
     }
@@ -35,13 +35,10 @@ impl <T> List<T> {
     }
 
     pub fn pop(&mut self) -> Option<T> {
-        match self.head.take() {
-            None => None,
-            Some(node) => {
-                self.head = node.next;
-                Some(node.elem)
-            }
-        }
+        self.head.take().map(|node| {
+            self.head = node.next;
+            node.elem
+        })
     }
 }
 
@@ -54,6 +51,6 @@ mod tests {
     fn test() {
         let mut list = List::new();
         list.push(42);
-        println!("{:?}", list);
+        assert_eq!(Some(42), list.pop());
     }
 }
